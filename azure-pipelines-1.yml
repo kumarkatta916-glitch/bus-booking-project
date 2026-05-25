@@ -1,0 +1,41 @@
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- script: echo "Pipeline Started"
+  displayName: 'Start Pipeline'
+
+# FRONTEND BUILD
+
+- task: Docker@2
+  displayName: Build Frontend Image
+
+  inputs:
+
+    command: build
+
+    Dockerfile: 'frontend/Dockerfile'
+
+    repository: 'kiran5454/bus-frontend'
+
+    tags: latest
+
+# BACKEND BUILD
+
+- task: Docker@2
+  displayName: Build Backend Image
+
+  inputs:
+
+    command: build
+
+    Dockerfile: 'backend/Dockerfile'
+
+    repository: 'kiran5454/bus-backend'
+
+    tags: latest
