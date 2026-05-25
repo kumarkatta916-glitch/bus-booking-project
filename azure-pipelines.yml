@@ -1,0 +1,37 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+# FRONTEND IMAGE BUILD
+
+- task: Docker@2
+  displayName: Build Frontend Image
+
+  inputs:
+
+    command: build
+
+    Dockerfile: frontend/Dockerfile
+
+    repository: kiran5454/bus-frontend
+
+    tags: latest
+
+# BACKEND IMAGE BUILD
+
+- task: Docker@2
+  displayName: Build Backend Image
+
+  inputs:
+
+    command: build
+
+    Dockerfile: backend/Dockerfile
+
+    repository: kiran5454/bus-backend
+
+    tags: latest
